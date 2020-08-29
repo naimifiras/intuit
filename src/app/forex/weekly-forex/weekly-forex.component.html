@@ -1,0 +1,32 @@
+<div class="container-fluid row">
+    <div class="col-md-3" style="text-align: center;">
+        <input type="text" #inputFromCurrency list="fromCurrencies" class="form-control no-outline"
+            placeholder="Choose the from country currency">
+        <datalist id="fromCurrencies">
+            <option *ngFor="let currency of currencyList" [value]="currency.name">{{currency.value}}</option>
+        </datalist>
+    </div>
+    <div class="col-md-3" style="text-align: center;">
+        <input type="text" #inputToCurrency list="toCurrencies" class="form-control no-outline"
+            placeholder="Choose the to country currency">
+        <datalist id="toCurrencies">
+            <option *ngFor="let currency of currencyList" [value]="currency.name">{{currency.value}}</option>
+        </datalist>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-success" (click)="onCurrencyChange()">Show Intraday Currency!</button>
+    </div>
+    <div class="col-md-3">
+        <div class="circle">
+            {{closingPrice}}
+        </div>
+    </div>
+</div>
+<div *ngIf="weeklyExchangeRates && weeklyExchangeRates.length>0">
+    <highcharts-chart 
+        [Highcharts]="Highcharts" 
+        [options]="options" 
+        [constructorType]="type" 
+        [(update)]="updateFlag">
+    </highcharts-chart>
+</div>

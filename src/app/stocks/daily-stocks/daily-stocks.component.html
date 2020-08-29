@@ -1,0 +1,26 @@
+<div class="container-fluid row">
+    <div class="col-md-6" style="text-align: center;">
+        <input type="text" name="companyList" list="companies" class="form-control no-outline"
+            (change)="onValueChange($event)" placeholder="Type stock company abbreviation or choose from existing list!">
+        <datalist id="companies">
+            <option *ngFor="let company of companyList" [value]="company.name">{{company.value}}</option>
+        </datalist>
+        <br>
+        <p style="color: red; font-weight: bold;">{{errorMessage}}</p>
+    </div>
+    <div class="col-md-6">
+        <div class="circle">
+            {{closingPrice}}
+        </div>
+    </div>
+</div>
+<div *ngIf="dailyStocks && dailyStocks.length>0">
+    <highcharts-chart 
+        [Highcharts]="Highcharts" 
+        [options]="options" 
+        [constructorType]="type"
+        [(update)]="updateFlag"
+    >
+
+    </highcharts-chart>
+</div>
